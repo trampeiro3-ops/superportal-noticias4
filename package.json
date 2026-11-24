@@ -1,0 +1,17 @@
+{
+  "name": "vertice-4-1-cloudflare-pages",
+  "private": true,
+  "version": "4.1.4-cloudflare-pages",
+  "type": "module",
+  "scripts": {
+    "check": "node --check cloudflare/_worker.js && node --check cloud-functions/lib/cloudflare-adapter.js && node --check cloud-functions/lib/turso-adapter.js && node --check cloud-functions/lib/worker.js && node --check cloud-functions/lib/editorial-policy.js && node --check scripts/build-cloudflare.mjs",
+    "build": "npm run check && npm test && node scripts/build-cloudflare.mjs",
+    "test": "node scripts/smoke-test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "esbuild": "0.28.2"
+  }
+}

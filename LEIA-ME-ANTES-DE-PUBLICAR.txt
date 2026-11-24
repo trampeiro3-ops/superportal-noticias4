@@ -1,0 +1,13 @@
+VÉRTICE 4.1 — PACOTE CLOUDFLARE + GITHUB
+
+1) O destino é Cloudflare Pages conectado ao GitHub (Git integration).
+2) NÃO envie somente o ZIP ao repositório: o GitHub armazena o ZIP como um arquivo e não o descompacta automaticamente.
+3) O ZIP contém uma pasta principal com todos os arquivos. Extraia essa pasta e envie o conteúdo dela para a raiz do repositório, preservando as subpastas.
+4) No Cloudflare Pages use: Build command = npm run build; Build output directory = dist; Root directory = /; preset = None.
+5) Execute database/VERTICE_4_1_SCHEMA_TURSO.sql no SQL Editor do Turso.
+6) Configure os secrets TURSO_DATABASE_URL, TURSO_AUTH_TOKEN e ADMIN_TOKEN no Cloudflare Pages.
+7) ADMIN_TOKEN é a senha privada do /admin e deve ter pelo menos 32 caracteres. Não existe senha padrão.
+8) Depois de configurar os segredos, faça um novo deployment.
+9) Teste /api/health e /admin antes de ativar qualquer automação.
+
+Detalhes completos em README.md.

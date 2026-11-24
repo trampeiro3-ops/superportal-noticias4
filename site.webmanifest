@@ -1,0 +1,10 @@
+{
+  "name": "VÉRTICE — Notícias em movimento",
+  "short_name": "VÉRTICE",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#101a2e",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

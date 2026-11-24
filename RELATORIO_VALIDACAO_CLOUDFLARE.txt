@@ -1,0 +1,34 @@
+RELATÓRIO DE PREPARAÇÃO — VÉRTICE 4.1.4 / CLOUDFLARE PAGES + GITHUB
+Data: 24/11/2026
+
+ALTERAÇÕES
+- Adaptado o ponto de entrada do backend para Cloudflare Pages Advanced Mode (_worker.js).
+- Criado build que gera a pasta dist com os recursos estáticos e o Worker empacotado.
+- Mantida a integração Turso/libSQL via HTTP v2 e a camada de compatibilidade usada pelo backend.
+- Mantidas as rotas existentes do portal, administração, matérias e APIs.
+- Adaptada a rota protegida POST /api/cron para Cloudflare Pages; por padrão, a coleta permanece manual até configurar agendador externo.
+- Removidas do pacote final as entradas específicas do EdgeOne.
+- Atualizadas as mensagens de instalação e a política de privacidade para Cloudflare Pages.
+- Incluídos o SQL do Turso e o guia GitHub/Cloudflare.
+
+VERIFICAÇÕES LOCAIS CONCLUÍDAS
+- Sintaxe dos módulos JavaScript: aprovada com node --check.
+- Testes rápidos: página inicial, canonical URL, cabeçalhos de segurança, acesso ao login administrativo, falta de segredos e proteção da rota Cron: aprovados.
+- Esquema SQL: executado em SQLite local de teste; 9 tabelas criadas.
+- Varredura de arquivos: nenhum segredo real foi incluído no pacote.
+- Estrutura de publicação: definida para Pages Advanced Mode com saída em dist.
+
+LIMITAÇÃO DESTA EXECUÇÃO
+O ambiente de preparação não conseguiu acessar registry.npmjs.org (erro de DNS EAI_AGAIN). Por isso, não foi possível baixar o esbuild e executar localmente o build final que gera dist/_worker.js. O pacote inclui a dependência esbuild fixada na versão 0.28.2 e o comando npm run build; o ambiente de build do Cloudflare deverá instalar essa dependência e executar o empacotamento quando o GitHub for conectado. Não declarei o deployment como concluído.
+
+AINDA EXIGE CONFIGURAÇÃO NA CONTA DO USUÁRIO
+1. Executar database/VERTICE_4_1_SCHEMA_TURSO.sql no banco Turso real.
+2. Cadastrar TURSO_DATABASE_URL, TURSO_AUTH_TOKEN e ADMIN_TOKEN nos segredos do Cloudflare Pages.
+3. Fazer o primeiro deployment pelo Git integration do GitHub.
+4. Testar /api/health e /admin no domínio publicado.
+5. Configurar CRON_SECRET e agendador externo somente se quiser automação.
+
+SEGURANÇA
+Não há senha padrão. ADMIN_TOKEN é a chave privada de acesso ao painel e precisa ter pelo menos 32 caracteres. Nunca comite tokens, senhas ou chaves no GitHub. Qualquer token Turso que já tenha sido compartilhado deve ser revogado e substituído.
+
+Os testes locais não substituem os testes com as credenciais reais, banco remoto e deployment da conta Cloudflare. Não é possível prometer ausência absoluta de bugs.
